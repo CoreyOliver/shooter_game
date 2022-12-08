@@ -56,7 +56,7 @@ class Raven {
     }
 }
 
-let explosion = []
+let explosions = []
 class Explosion {
     constructor(x, y, size) {
         this.image = new Image()
@@ -68,9 +68,25 @@ class Explosion {
         this.y = y
         this.frame = 0
         this.sound = new Audio()
-        // this.sound.src = add sound!!!!!!!!!!!
+        // this.sound.src = ''
+        this.timeSinceLastFrame = 0
+        this.frameInterval = 200
+        this.markForDeletion = false
+    }
+    update(deltaTime) {
+        if(this.frame === 0) this.sound.play()
+        this.timeSinceLastFrame += deltaTime
+        if(this.timeSinceLastFrame > this.frameInterval) {
+            this.frame++
+            if(this.frame > 5) this.markForDeletion = true
+        }
+    }
+    draw() {
+        ctx.drawImage(this.image, this.frame * this.spriteWidth, 0 , this.spriteWidth,this.spriteHeight,this.x,this.y,this.size,this.size)
     }
 }
+
+
 function drawScore() {
     ctx.fillStyle = 'black'
     ctx.fillText('Score: ' + score, 50, 125)
@@ -91,6 +107,7 @@ window.addEventListener('click', function(e) {
         ){
             o.markForDeletion = true
             score++
+            explosions.push(new Explosion(o.x,o.y,o.width))
         }
     })
 })
@@ -109,9 +126,10 @@ function animate(timestamp) {
         })
     }
     drawScore();
-    [...ravens].forEach(object => object.update(deltaTime));
-    [...ravens].forEach(object => object.draw());
+    [...ravens,...explosions].forEach(object => object.update(deltaTime));
+    [...ravens,...explosions].forEach(object => object.draw());
     ravens = ravens.filter(o => !o.markForDeletion)
+    explosions = explosions.filter(o => !o.markForDeletion)
     requestAnimationFrame(animate)
 }
 animate(0)
