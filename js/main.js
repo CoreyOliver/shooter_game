@@ -7,7 +7,7 @@ const collisionCtx = collisionCanvas.getContext('2d')
 collisionCanvas.height = window.innerHeight
 collisionCanvas.width = window.innerWidth
 let score = 0
-ctx.font = '50px Impact'
+ctx.font = '100px Impact'
 
 let timeToNextRaven = 0
 let ravenInterval = 500
@@ -73,9 +73,9 @@ class Explosion {
 }
 function drawScore() {
     ctx.fillStyle = 'black'
-    ctx.fillText('Score: ' + score, 50, 75)
+    ctx.fillText('Score: ' + score, 50, 125)
     ctx.fillStyle = 'white'
-    ctx.fillText('Score: ' + score, 55, 80)
+    ctx.fillText('Score: ' + score, 55, 120)
 
 }
 
