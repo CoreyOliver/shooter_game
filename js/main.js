@@ -70,7 +70,7 @@ class Explosion {
         this.sound = new Audio()
         // this.sound.src = ''
         this.timeSinceLastFrame = 0
-        this.frameInterval = 200
+        this.frameInterval = 135
         this.markForDeletion = false
     }
     update(deltaTime) {
@@ -78,6 +78,7 @@ class Explosion {
         this.timeSinceLastFrame += deltaTime
         if(this.timeSinceLastFrame > this.frameInterval) {
             this.frame++
+            this.timeSinceLastFrame = 0
             if(this.frame > 5) this.markForDeletion = true
         }
     }
@@ -132,4 +133,4 @@ function animate(timestamp) {
     explosions = explosions.filter(o => !o.markForDeletion)
     requestAnimationFrame(animate)
 }
-animate(0)
+// animate(0)
