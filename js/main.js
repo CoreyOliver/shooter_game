@@ -133,4 +133,4 @@ function animate(timestamp) {
     explosions = explosions.filter(o => !o.markForDeletion)
     requestAnimationFrame(animate)
 }
-// animate(0)
+animate(0)
