@@ -1,5 +1,6 @@
 # My Shooting Game Project:
 Vanilla JS modules leveraging HTML5 canvas elements to create a quick action packed game 'shooting' enemies as they fly by
+## Come see my project at : https://coshootergame.netlify.app/
 # How it's made:
 Vanilla JS
 CSS
